@@ -12,26 +12,61 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText editTextMe;
     Button btnPlay;
+    Button btnScissors;
+    Button btnRock;
+    Button btnPaper;
     TextView textViewResult;
+
+    String me = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editTextMe = (EditText) findViewById(R.id.editTextMe);
         btnPlay = (Button) findViewById(R.id.btnPlay);
+        btnScissors = (Button) findViewById(R.id.btnScissors);
+        btnRock = (Button) findViewById(R.id.btnRock);
+        btnPaper = (Button) findViewById(R.id.btnPaper);
         textViewResult = (TextView) findViewById(R.id.textViewResult);
+
+        btnScissors.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                me = "scissors";
+                btnScissors.setEnabled(false);
+                btnRock.setEnabled(true);
+                btnPaper.setEnabled(true);
+            }
+        });
+
+        btnRock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                me = "rock";
+                btnScissors.setEnabled(true);
+                btnRock.setEnabled(false);
+                btnPaper.setEnabled(true);
+            }
+        });
+
+        btnPaper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                me = "paper";
+                btnScissors.setEnabled(true);
+                btnRock.setEnabled(true);
+                btnPaper.setEnabled(false);
+            }
+        });
 
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String me = editTextMe.getText().toString();
                 String computer = randomComputer();
                 String result = whoWon(me, computer);
-                showToast(result);
+                showToast(me + " vs " + computer);
                 showResult(result);
             }
         });
@@ -87,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 result = "Typo!";
             }
         } else {
-            result = "Typo!";
+            result = "Select your move!";
         }
 
         return result;
