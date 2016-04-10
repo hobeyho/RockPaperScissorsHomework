@@ -8,9 +8,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
-    EditText editTextMe, editTextComputer;
+    EditText editTextMe;
     Button btnPlay;
     TextView textViewResult;
 
@@ -20,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         editTextMe = (EditText) findViewById(R.id.editTextMe);
-        editTextComputer = (EditText) findViewById(R.id.editTextComputer);
         btnPlay = (Button) findViewById(R.id.btnPlay);
         textViewResult = (TextView) findViewById(R.id.textViewResult);
 
@@ -28,14 +29,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String me = editTextMe.getText().toString();
-                String computer = editTextComputer.getText().toString();
+                String computer = randomComputer();
                 String result = whoWon(me, computer);
                 showToast(result);
                 showResult(result);
             }
         });
     }
-    
+
+    public String randomComputer(){
+        String computer = "";
+        Random rand = new Random();
+        int random = rand.nextInt(3);
+        if(random==0){
+            computer = "scissors";
+        } else if(random==1){
+            computer = "rock";
+        } else if(random==2){
+            computer = "paper";
+        } else {
+            computer = "error";
+        }
+        return computer;
+    }
+
     public String whoWon(String me, String computer){
         String result = "";
 
