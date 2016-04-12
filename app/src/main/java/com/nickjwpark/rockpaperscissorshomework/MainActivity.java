@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     Button btnRock;
     Button btnPaper;
     TextView textViewResult;
+    ImageView imageViewMe;
+    ImageView imageViewComputer;
 
     String me = "";
 
@@ -30,11 +33,14 @@ public class MainActivity extends AppCompatActivity {
         btnRock = (Button) findViewById(R.id.btnRock);
         btnPaper = (Button) findViewById(R.id.btnPaper);
         textViewResult = (TextView) findViewById(R.id.textViewResult);
+        imageViewMe = (ImageView) findViewById(R.id.imageViewMe);
+        imageViewComputer = (ImageView) findViewById(R.id.imageViewComputer);
 
         btnScissors.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 me = "scissors";
+                imageViewMe.setImageResource(R.drawable.left_scissors);
                 btnScissors.setEnabled(false);
                 btnRock.setEnabled(true);
                 btnPaper.setEnabled(true);
@@ -45,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 me = "rock";
+                setMeImage(me);
                 btnScissors.setEnabled(true);
                 btnRock.setEnabled(false);
                 btnPaper.setEnabled(true);
@@ -55,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 me = "paper";
+                imageViewMe.setImageResource(R.drawable.left_paper);
                 btnScissors.setEnabled(true);
                 btnRock.setEnabled(true);
                 btnPaper.setEnabled(false);
@@ -65,11 +73,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String computer = randomComputer();
+                setComputerImage(computer);
                 String result = whoWon(me, computer);
                 showToast(me + " vs " + computer);
                 showResult(result);
             }
         });
+    }
+
+    public void setMeImage(String me){
+        if(me.equals("scissors")){
+            imageViewMe.setImageResource(R.drawable.left_scissors);
+        } else if(me.equals("rock")){
+            imageViewMe.setImageResource(R.drawable.left_rock);
+        } else if(me.equals("paper")){
+            imageViewMe.setImageResource(R.drawable.left_paper);
+        }
+    }
+
+    public void setComputerImage(String computer){
+        if(computer.equals("scissors")){
+            imageViewComputer.setImageResource(R.drawable.right_scissors);
+        } else if(computer.equals("rock")){
+            imageViewComputer.setImageResource(R.drawable.right_rock);
+        } else if(computer.equals("paper")){
+            imageViewComputer.setImageResource(R.drawable.right_paper);
+        }
     }
 
     public String randomComputer(){
