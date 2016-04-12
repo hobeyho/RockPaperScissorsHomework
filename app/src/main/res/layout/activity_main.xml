@@ -12,11 +12,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Play"
         android:id="@+id/btnPlay"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="91dp" />
+        android:layout_marginBottom="91dp"
+        android:background="@drawable/play_button" />
 
     <TextView
         android:layout_width="wrap_content"
