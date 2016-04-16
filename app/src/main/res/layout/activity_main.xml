@@ -24,8 +24,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Result"
         android:id="@+id/textViewResult"
-        android:layout_marginBottom="85dp"
-        android:layout_above="@+id/btnPlay"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <LinearLayout
@@ -33,7 +32,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout"
-        android:layout_marginBottom="92dp"
         android:layout_above="@+id/textViewResult"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -111,4 +109,54 @@
             android:layout_weight="1"
             android:src="@drawable/right_scissors" />
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewResult"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="37dp"
+        android:id="@+id/linearLayout4"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="현재 점수: "
+            android:id="@+id/textView3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="0"
+            android:id="@+id/textViewCurScore" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout4"
+        android:layout_centerHorizontal="true"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="최고 점수: "
+            android:id="@+id/textView4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="0"
+            android:id="@+id/textViewHighScore" />
+    </LinearLayout>
+
 </RelativeLayout>

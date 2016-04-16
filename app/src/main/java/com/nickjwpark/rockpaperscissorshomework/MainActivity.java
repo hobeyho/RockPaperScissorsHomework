@@ -21,7 +21,12 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageViewMe;
     ImageView imageViewComputer;
 
+    TextView textViewCurScore;
+    TextView textViewHighScore;
+
     String me = "";
+    int curScore = 0;
+    int highScore = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
         textViewResult = (TextView) findViewById(R.id.textViewResult);
         imageViewMe = (ImageView) findViewById(R.id.imageViewMe);
         imageViewComputer = (ImageView) findViewById(R.id.imageViewComputer);
+
+        textViewCurScore = (TextView) findViewById(R.id.textViewCurScore);
+        textViewHighScore = (TextView) findViewById(R.id.textViewHighScore);
 
         btnScissors.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 String result = whoWon(me, computer);
                 showToast(me + " vs " + computer);
                 showResult(result);
+                handleScore(result);
             }
         });
     }
@@ -163,6 +172,32 @@ public class MainActivity extends AppCompatActivity {
 
     public void showResult(String result){
         textViewResult.setText(result);
+    }
+
+    public void handleScore(String result){
+        if(result.equals("Win!")){
+            curScore = curScore + 1;
+        } else if(result.equals("Lose!")){
+            curScore = 0;
+        } else if(result.equals("Draw!")){
+            //no change in score
+        } else {
+            //no change in score
+        }
+        setCurScore(curScore);
+        checkHighScore(curScore);
+
+    }
+
+    public void setCurScore(int score){
+        textViewCurScore.setText(""+score);
+    }
+
+    public void checkHighScore(int score){
+        if(score > highScore){
+            highScore = score;
+            textViewHighScore.setText(""+score);
+        }
     }
 
 }
