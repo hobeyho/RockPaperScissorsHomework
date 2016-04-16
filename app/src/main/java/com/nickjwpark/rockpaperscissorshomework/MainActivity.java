@@ -1,5 +1,6 @@
 package com.nickjwpark.rockpaperscissorshomework;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -80,14 +81,58 @@ public class MainActivity extends AppCompatActivity {
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String computer = randomComputer();
-                setComputerImage(computer);
-                String result = whoWon(me, computer);
-                showToast(me + " vs " + computer);
-                showResult(result);
-                handleScore(result);
+
+                //btnPlay를 여러번 누를수 없게 딜레이가 끝날때까지 btnPlay를 비활성화 시켜준다
+                btnPlay.setEnabled(false);
+
+                //먼저 가위로 모든것이 보이게 해 준다
+                setComputerImage("scissors");
+                setMeImage("scissors");
+                showResult("가위!");
+
+                //Handler 를 만들어준다
+                final Handler handler = new Handler();
+                //1초 후 모두 바위로 보이게 해 준다
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        setComputerImage("rock");
+                        setMeImage("rock");
+                        showResult("바위!");
+                    }
+                }, 1000);
+
+                //2초 후 모두 보로 보이게 해 준다
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        setComputerImage("paper");
+                        setMeImage("paper");
+                        showResult("보!");
+                    }
+                }, 2000);
+
+                //3초 후 결과를 보여준다
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        setMeImage(me);
+                        playGame();
+                        //게임이 끝났을때 버튼을 다시 누를 수 있게 해준다
+                        btnPlay.setEnabled(true);
+                    }
+                }, 3000);
             }
         });
+    }
+
+    public void playGame(){
+        String computer = randomComputer();
+        setComputerImage(computer);
+        String result = whoWon(me, computer);
+        showToast(me + " vs " + computer);
+        showResult(result);
+        handleScore(result);
     }
 
     public void setMeImage(String me){
